@@ -9,6 +9,7 @@ public class Main {
     public static void main(String[] args) {
         Point3d A = null, B = null, C = null;
 
+        // приветствие и запрос способа вычисления
         System.out.print("Выбирете способ ввода (1 - Автоматический, 2 - Ручной): ");
         int option = in.nextInt();
         switch (option) {
@@ -52,24 +53,40 @@ public class Main {
             }
         }
 
+        // сравнение точек на совпадение
         if (A.equals(B) || A.equals(C) || B.equals(C)) {
             System.out.println("Некоторые точки совпадают, расчет не возможен");
             System.exit(-1);
         }
+        // вывод результата
         else {
             System.out.printf("Площадь треугольника равна: %.2f", computeArea(A, B, C));
         }
     }
 
+    // вычисление площади треугольника
     public static double computeArea(Point3d A, Point3d B, Point3d C) {
 
         double line_ab = A.distanceTo(B);
         double line_ac = A.distanceTo(C);
         double line_bc = B.distanceTo(C);
 
+        // проверка на равнозначность сторон
+        if (line_ab + line_ac == line_bc || line_bc + line_ac == line_ab || line_ab + line_bc == line_ac) {
+            System.out.println("Одна из сторон равна сумме двух других. Такой треугольник тоже невозможен.");
+            System.exit(-1);
+        }
+        // проверка стороны на отличие от 0
+        else if (line_ab == 0 || line_bc == 0 || line_ac == 0) {
+            System.out.println("Одна из сторон или все равны нулю. Такой треугольник тоже невозможен.");
+            System.exit(-1);
+        }
+
         double p = (line_ab + line_ac + line_bc) / 2;
         return Math.sqrt(p * (p - line_ab) * (p - line_ac) * (p - line_bc));
     }
+
+    // помощник для автоматического способа.
     public static double RC() {
         double min = -100;
         double max = 100;

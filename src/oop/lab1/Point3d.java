@@ -40,10 +40,12 @@ public class Point3d {
         zCoord = val;
     }
 
+    // проверка на совпадение точек
     public boolean equals(Point3d point3d) {
         return this.xCoord == point3d.xCoord && this.yCoord == point3d.yCoord && this.zCoord == point3d.zCoord;
     }
 
+    // вычисление длинны отрезка
     public double distanceTo(Point3d point3d) {
         return Math.sqrt(Math.pow(point3d.xCoord - this.xCoord, 2)
                 + Math.pow(point3d.yCoord - this.yCoord, 2)
