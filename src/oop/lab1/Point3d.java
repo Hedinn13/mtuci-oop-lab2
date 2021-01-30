@@ -41,8 +41,18 @@ public class Point3d {
     }
 
     // проверка на совпадение точек
-    public boolean equals(Point3d point3d) {
-        return this.xCoord == point3d.xCoord && this.yCoord == point3d.yCoord && this.zCoord == point3d.zCoord;
+    public boolean equals(Object obj) {
+
+        // проверяем, а точно ли в объект передана точка
+        if (obj instanceof Point3d) {
+
+            Point3d point3d = (Point3d) obj;
+            if (this.xCoord == point3d.xCoord && this.yCoord == point3d.yCoord && this.zCoord == point3d.zCoord) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     // вычисление длинны отрезка
